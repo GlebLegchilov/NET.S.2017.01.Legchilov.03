@@ -23,8 +23,11 @@ namespace TaskThree
         /// <returns>New number</returns>
         public static int Insertion(int numberOne, int numberTwo, int indexOne, int indexTwo)
         {
+            
+            if ((indexOne < 0) || (indexOne > 30) || (indexTwo < 0) || (indexTwo > 30))
+                throw new ArgumentOutOfRangeException();
             if (indexOne > indexTwo)
-                throw new Exception("Incorrect parameters");
+                throw new ArgumentException();
             return InsertionMaster(numberOne, numberTwo, indexOne, indexTwo);
         }
         #endregion
@@ -38,58 +41,17 @@ namespace TaskThree
         /// <param name="indexOne">First index</param>
         /// <param name="indexTwo">Second index</param>
         /// <returns>New number</returns>
-        private static int InsertionMaster(int numberOne, int numberTwo, int indexOne, int indexTwo)
+        public static int InsertionMaster(int numberOne, int numberTwo, int indexOne, int indexTwo)
         {
-            int[] numerOneBinary = GetBinaryRepresentation(numberOne);
-            int[] numerTwoBinary = GetBinaryRepresentation(numberTwo);
-            int j = 0;
-            for (int i = indexOne; i <= indexTwo; i++)
-            {
-                numerOneBinary[i] = numerTwoBinary[j++];
-            }
-            return GetDecimalRepresentation(numerOneBinary);
-        }
-
-
-        /// <summary>
-        /// Return binary representation of decimal number
-        /// </summary>
-        /// <param name="numberDecimel">Decimel number</param>
-        /// <returns>Int's array</returns>
-        private static int[] GetBinaryRepresentation(int numberDecimel)
-        {
-            int[] result = new int[32];
-            if (numberDecimel < 0)
-            {
-                numberDecimel = numberDecimel * (-1);
-                result[31] = 1;
-            }
-            int j = 0;
-            while (numberDecimel > 0)
-            {
-                int m = numberDecimel % 2;
-                numberDecimel = numberDecimel / 2;
-                result[j++] = m;
-            }
-            return result;
-        }
-
-
-        /// <summary>
-        /// Return decimal representation of binary number
-        /// </summary>
-        /// <param name="numberBinary">Int's array</param>
-        /// <returns>Decimal number</returns>
-        private static int GetDecimalRepresentation(int[] numberBinary)
-        {
-            int result = 0;
-            for(int i = 30; i>=0; i--)
-            {
-                result = result + (int)Math.Pow((numberBinary[i]*2), i);
-            }
-            if (numberBinary[31] == 1)
-                result = result * (-1);
-            return result;
+            uint uNumberOne = (uint)numberOne;
+            uint uNumberTwo = (uint)numberTwo;
+            uint mask = UInt32.MaxValue;
+            mask <<= 32 - (indexTwo - indexOne + 1);
+            mask >>= 32 - (indexTwo + 1);
+            uNumberTwo <<= indexOne;
+            uNumberTwo &= mask;
+            uNumberOne &= ~mask;
+            return (int)(uNumberOne | uNumberTwo);
         }
         #endregion
     }

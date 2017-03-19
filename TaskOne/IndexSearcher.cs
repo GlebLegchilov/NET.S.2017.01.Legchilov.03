@@ -16,13 +16,13 @@ namespace TaskOne
         /// <returns>Index</returns>
         public static int Search(int[] array)
         {
-            if (array.Length == 0)
+            if (array == null)
             {
-                throw new Exception("Array is empty");
+                throw new ArgumentNullException();
             }
             if (array.Length >1000)
             {
-                throw new Exception("Invalid array size");
+                throw new ArgumentOutOfRangeException();
             }
             return SearchMaster(array);
         }
@@ -34,7 +34,7 @@ namespace TaskOne
         /// </summary>
         /// <param name="array">Number's array</param>
         /// <returns>Index</returns>
-        private static int SearchMaster(int[] array)
+        public static int SearchMaster(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
