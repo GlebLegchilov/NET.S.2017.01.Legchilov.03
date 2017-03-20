@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("TaskThreeTest")]
 namespace TaskThree
 {
     /// <summary>
@@ -41,7 +42,7 @@ namespace TaskThree
         /// <param name="indexOne">First index</param>
         /// <param name="indexTwo">Second index</param>
         /// <returns>New number</returns>
-        public static int InsertionMaster(int numberOne, int numberTwo, int indexOne, int indexTwo)
+        internal static int InsertionMaster(int numberOne, int numberTwo, int indexOne, int indexTwo)
         {
             uint uNumberOne = (uint)numberOne;
             uint uNumberTwo = (uint)numberTwo;

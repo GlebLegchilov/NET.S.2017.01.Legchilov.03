@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("TaskTwoTest")]
 namespace TaskTwo
 {
     /// <summary>
@@ -9,11 +9,6 @@ namespace TaskTwo
     /// </summary>
     public static class ArraysSort
     {
-        /// <summary>
-        /// Mask for regular expression
-        /// </summary>
-        const string pattern = @"^[a-z]*$";
-
         #region Interface 
         /// <summary>
         /// Sort and concat two string
@@ -26,7 +21,7 @@ namespace TaskTwo
             if ((strOne == null) || (strTwo == null))
                 throw new ArgumentNullException();
 
-            if ((Regex.IsMatch(strOne, pattern, RegexOptions.None)) && (Regex.IsMatch(strTwo, pattern, RegexOptions.None)))
+            if ((strOne.All(u => u >= 'a' && u <= 'z')) && (strTwo.All(u => u >= 'a' && u <= 'z')))
             {
                 return ConcatStr(strOne, strTwo);
             }
@@ -44,7 +39,7 @@ namespace TaskTwo
         /// <param name="strOne">First unsorted string</param>
         /// <param name="strTwo">Second unsorted string</param>
         /// <returns>New string</returns>
-        public static string ConcatStr(string strOne, string strTwo)
+        internal static string ConcatStr(string strOne, string strTwo)
         {
             var result = Enumerable.Distinct((string.Concat(strOne, strTwo)).OrderBy(x => x)).ToArray();
             string strRes = string.Empty;

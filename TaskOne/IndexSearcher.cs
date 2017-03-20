@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("TaskOneTest")]
 namespace TaskOne
 {
     /// <summary>
@@ -34,7 +35,7 @@ namespace TaskOne
         /// </summary>
         /// <param name="array">Number's array</param>
         /// <returns>Index</returns>
-        public static int SearchMaster(int[] array)
+        internal static int SearchMaster(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
