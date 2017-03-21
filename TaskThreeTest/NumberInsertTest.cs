@@ -16,9 +16,6 @@ namespace TaskThreeTest
         [TestCase(15, int.MaxValue, 3, 5, ExpectedResult = 63)]
         [TestCase(15, 15, 1, 3, ExpectedResult = 15)]
         [TestCase(15, 15, 1, 4, ExpectedResult = 31)]
-        [TestCase(15, -15, 0, 4, ExpectedResult = 31)]
-        [TestCase(15, -15, 1, 4, ExpectedResult = 15)]
-        [TestCase(-8, -15, 1, 4, ExpectedResult = -6)]
         public int InsertionMaster_PositiveTest(int first, int second, int startPosition, int finishPosition)
         {
             return InsertionMaster(first, second, startPosition, finishPosition);

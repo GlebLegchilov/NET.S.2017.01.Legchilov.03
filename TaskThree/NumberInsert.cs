@@ -46,7 +46,7 @@ namespace TaskThree
         {
             uint uNumberOne = (uint)numberOne;
             uint uNumberTwo = (uint)numberTwo;
-            uint mask = UInt32.MaxValue;
+            uint mask = uint.MaxValue;
             mask <<= 32 - (indexTwo - indexOne + 1);
             mask >>= 32 - (indexTwo + 1);
             uNumberTwo <<= indexOne;
